@@ -3,8 +3,6 @@ var router = express.Router(); // defining the router, which define an app behav
 
 db = require('../queries');
 
-router.get('/', function(req,res){
-	res.render('index');
-}); 
+router.get('/ottawa', db.getOttawa); 
 
 module.exports = router;
