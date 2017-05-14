@@ -11,10 +11,6 @@ var bodyParser = require('body-parser'); // adds a body object to your request s
 var ottawa = require('./routes/ottawa');
 var index = require('./routes/index');
 var gatineau = require('./routes/gatineau');
-<<<<<<< HEAD
-var properties = require('./routes/properties');
-=======
->>>>>>> 5deed5500c2e5a9c22a854d87970a14337c63e6f
 
 var app = express(); // initate app
 app.use(express.static(path.join(__dirname, 'public'))); // tells app to use the /public directory
@@ -34,10 +30,6 @@ app.use(bodyParser.urlencoded({ extended: false })); // allows app to read data 
 app.use('/', ottawa); 
 app.use('/', index);
 app.use('/', gatineau);
-<<<<<<< HEAD
-app.use('/', properties);
-=======
->>>>>>> 5deed5500c2e5a9c22a854d87970a14337c63e6f
 
 //error handler
 app.use(function(err, req, res, next) {

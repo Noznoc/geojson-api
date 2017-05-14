@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ## DESCRIPTION
 
 The (beta) geojson-api was developed for a project that assess OpenStreetMap (OSM) building data for Ottawa and Gatineau. This app uses a RESTful API to pull geojson files for Ottawa and Gatineau stored in a PostgreSQL/PostGIS database. 
@@ -22,22 +21,3 @@ Now that your database exists with the geojson data, you can run the API locally
 In queries.js you will neeed to change the database URL credentials on line 10 to your own database credentials
 
 Apart from that, the query functions in queries.js (e.g., getOttawa()) will need to be altered based off what you want to pull from the database (you will also need to change the routes). The current code pulls the wkb_geometry from two different tables (one holds all OSM building data from Ottawa and the other holds all OSM building data from Ottawa) and then converts them into geojson.
-=======
-## TO INSTALL
-
-Really rough guide, detailed steps to come.
->>>>>>> 5deed5500c2e5a9c22a854d87970a14337c63e6f
-
-Install GDAL, Postgres 9.6 and pgAdmin4 v1 and PostGIS 2.3.2.
-
-You will need to install GDAL and ogr2ogr to import a geojson file to the Postgres database. 
-
-The following lines were used to add the Ottawa Building and Ottawa Building geojsons into Postgres
-
-ogr2ogr -f "PostgreSQL" PG:"dbname=osm_canada user=postgres password=january2017*" "OttBuildW.geojson" -nln ottawa -append
-
-ogr2ogr -f "PostgreSQL" PG:"dbname=osm_canada user=postgres password=january2017*" "GatBuildW.geojson" -nln gatineau -append
-
-Then from the command line access the directory where the code is and enter:
-
-npm start
