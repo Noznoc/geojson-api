@@ -10,7 +10,7 @@ To install to manage database locally: OSGeo4W (or just install GDAL), PostgreSQ
 
 First you will need to import your geojson file into a PostgreSQL database. To accomplish this, first create a PostgreSQL database with the PostGIS extension. This can be done in pgAdmin4. Take note of the following database credentials: database name, user, and password
 
-To import a geojson file into a new table in the database you just created, you will need to use GDAL's ogr2ogr. First, add the GDAL folder path to my environmental variables. Then in the OSGeo4w Shell, go to the directory with the geojson data and then entered the following:
+To import a geojson file into a new table in the database you just created, you will need to use GDAL's ogr2ogr. First, add the GDAL folder path to your environmental variables. Then in the OSGeo4w Shell, go to the directory with the geojson data and then entered the following:
 
 ogr2ogr -f "PostgreSQL" PG:"dbname=[enter db name] user=[enter user] password=[enter password]" "[geojson file name]" -nln [table name] -append
 
@@ -20,4 +20,6 @@ Now that your database exists with the geojson data, you can run the API locally
 
 In queries.js you will neeed to change the database URL credentials on line 10 to your own database credentials
 
-Apart from that, the query functions in queries.js (e.g., getOttawa()) will need to be altered based off what you want to pull from the database (you will also need to change the routes). The current code pulls the wkb_geometry from two different tables (one holds all OSM building data from Ottawa and the other holds all OSM building data from Ottawa) and then converts them into geojson.
+The current server code pulls the wkb_geometry and building type tag from two different tables (one holds all OSM building data from Ottawa and the other holds all OSM building data from Ottawa) and then converts the query into a geojson feature collection. 
+
+The front end code outputs the data onto a map based on whether you select Ottawa or Gatineau.

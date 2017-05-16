@@ -8,9 +8,8 @@ var bodyParser = require('body-parser'); // adds a body object to your request s
 //var cookieParser = require('cookie-parser'); 
 
 // paths to routers
-var ottawa = require('./routes/ottawa');
 var index = require('./routes/index');
-var gatineau = require('./routes/gatineau');
+var data = require('./routes/data');
 
 var app = express(); // initate app
 app.use(express.static(path.join(__dirname, 'public'))); // tells app to use the /public directory
@@ -27,9 +26,8 @@ app.use(bodyParser.urlencoded({ extended: false })); // allows app to read data 
 // app.use(cookieParser()); // adds cookie object to all requests you get
 
 // create routes from the above paths to the following jade pages 
-app.use('/', ottawa); 
 app.use('/', index);
-app.use('/', gatineau);
+app.use('/', data);
 
 //error handler
 app.use(function(err, req, res, next) {

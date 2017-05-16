@@ -7,19 +7,15 @@ html
 		script(src='https://code.jquery.com/ui/1.12.1/jquery-ui.js')
 		link(rel='stylesheet', href='//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css')
 
-		// Leaflet
-		script(src='../src/leaflet/leaflet.js')
-		link(rel='stylesheet', href='../src/leaflet/leaflet.css')
-
 		// Mapbox
-		script(src='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.js')
-		script(src='../src/geojson-vt/geojson-vt-dev.js')
+		script(rel='stylesheet', src='https://api.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.css')
+		script(src='https://api.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.js')
 
 		// javaScripts
 		script(src='../javascripts/map.js')
 
 		// CSS
-		link(rel='stylesheet', href='../stylesheets/menu.css')
+		link(rel='stylesheet', href='../stylesheets/stylesheet.css')
 		
 
 	body
@@ -30,4 +26,13 @@ html
 				option(value='ottawa') Ottawa
 				option(value='gatineau') Gatineau
 
-		#map(style='width: 100%; height: 100%;')
+		#map
+
+		#legend
+			h4 Building Type
+			div
+				span(style='background-color: #00b3b3')
+				| yes
+				br
+				span(style='background-color: #003333')
+				| other

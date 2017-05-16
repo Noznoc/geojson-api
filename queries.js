@@ -8,34 +8,42 @@ var options = {
 var connectionString = process.env.DATABASE_URL || 'postgres://postgres:january2017*@127.0.0.1/osm_canada'; // Heroku postgres OR local host postgres inventory database @localhost:5432
 var db = pgp(connectionString); // using pg-promise, create database with connection details
 
-// Express middleware: function that will return all the rows' geometries and building type properties in Ottawa in the postgres database
-function getOttawa(req, res, next) {
-  var geom = [];
-  db.each('select ST_AsGeoJSON(wkb_geometry)::json as geometry, building as type from ottawa', [], row => {
-    var featureType = row.geometry.type;
-    if (featureType == "Polygon") { // some times features have points, so remove them
-      geom.push(row);
-    }
-  })
-    .then(function (data) {
-      res.send(geom);
-    })
-    .catch(function (err) {
-      return next(err);
-    });
-}
+// this Express middleware function gets the data based on the url request
+function getData(req, res, next) {
+  var geom = [], // to store the geometry 
+      geojson = [], // to store the complete geojsons
+      city = req.params.id; // to store the city requested from user
 
-// Express middleware: function that will return all the rows' geometries and building type properties in Gatineau in the postgres database
-function getGatineau(req, res, next) {
-  var geom = [];
-  db.each('select ST_AsGeoJSON(wkb_geometry)::json as geometry, building as type from gatineau', [], row => {
-    var featureType = row.geometry.type;
+  // for each row in the database select the geometry and building type from the city's table
+  db.each('select ST_AsGeoJSON(wkb_geometry)::json as geometry, building as type from ' + city, [], row => {
+    var featureType = row.geometry.type, // store the feature type (e.g., polygon, point)
+        buildingType = row.type; // store the building type
+
+    // if the feature is a polygon
     if (featureType == "Polygon") {
-      geom.push(row);
+      // create a single geojson's geometry and properties for the given row 
+      var data = {
+        'type': 'Feature',
+        'geometry': row.geometry,
+        'properties': {
+          'building': row.type
+        }
+      }
+      geom.push(data); // push the geojson geometry and properties data in the geom array 
     }
   })
-    .then(function (data) {
-      res.send(geom);
+    .then(function (data) { // then create a complete feature collection from all the geojson geometry and properties
+      var data = {
+        'type': 'geojson',
+        'data': {
+          'type': 'FeatureCollection',
+          'features': geom
+        }
+      }
+      geojson.push(data)
+    })
+    .then (function (data) {
+      res.send(geojson); // this will send the final geojson feature collection to the client
     })
     .catch(function (err) {
       return next(err);
@@ -44,6 +52,5 @@ function getGatineau(req, res, next) {
 
 // add query functions to app 
 module.exports = {
-  getOttawa: getOttawa,
-  getGatineau: getGatineau
+  getData: getData
 };
