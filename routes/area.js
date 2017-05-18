@@ -3,6 +3,6 @@ var router = express.Router(); // defining the router, which define an app behav
 
 db = require('../queries');
 
-router.get('/ottawa', db.getOttawa); 
+router.get('/api/area', db.area); // url to access the area data
 
 module.exports = router;

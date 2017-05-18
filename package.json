@@ -1,7 +1,7 @@
 {
-  "name": "osm-canada",
-  "version": "0.0.0",
-  "description": "OSM data extractions in Canada",
+  "name": "geojson-api",
+  "version": "1.0.0",
+  "description": "OSM GeoJSON API",
   "scripts": {
     "start": "supervisor ./bin/www"
   },
@@ -18,6 +18,10 @@
     "pg-promise": "^5.5.8",
     "postgeo": "*",
     "serve-favicon": "~2.3.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Noznoc/geojson-api"
   },
   "author": "Julia Conzon"
 }

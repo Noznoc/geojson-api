@@ -7,14 +7,16 @@ $(function(){
 		container: 'map',
 		style: 'mapbox://styles/julconz/cj2du5082003a2rp671hlp2lu',
 		center: [-75.71520, 45.419723],
-		zoom: 10
+		zoom: 12,
+		maxZoom: 16,
+		minZoom: 12
 	});
 
 	// when a city is selected
 	$('#cities').on('change', function() {
 		var city = this.value, // selected city
 			url =  'http://localhost:3000/' + city; // the api url to get the city data
-
+		$('#legend').show();
 		if (city !== 'Select city') {
 			$.getJSON(url, function(data) {
 				// add the source
@@ -25,7 +27,7 @@ $(function(){
 
 				// add layer from source
 				map.addLayer({
-					'id': city + '-geojson1',
+					'id': city + '-geojson',
 					'type': 'fill',
 					'source': city + '-geojson', // use the above geojson source
 					'paint': {
@@ -41,7 +43,17 @@ $(function(){
 					//'filter': ['==', 'building', 'yes'], []
 				})
 
-				$('#legend').show();
+
+
+				map.on('click', city + '-geojson', function(e){
+					$('#legend').html('<h4>Building Type</h4><div><span style="background-color: #00b3b3"></span>yes<br><span style="background-color: #003333"></span>other</div><br><strong>Area </strong>' + round(e.features[0].properties.area, 2) + ' m&sup2;<br><strong>Building type </strong>' + e.features[0].properties.building + '<br><strong>Centroid </strong>')
+				});
+
+				map.on('mouseenter', city + '-geojson', function () {
+				    map.getCanvas().style.cursor = 'pointer';
+				});
+
+				
 			});
 		}
 	});
