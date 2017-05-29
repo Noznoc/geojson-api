@@ -8,14 +8,38 @@ $(function(){
 		style: 'mapbox://styles/julconz/cj2du5082003a2rp671hlp2lu',
 		center: [-75.71520, 45.419723],
 		zoom: 12,
-		maxZoom: 16,
+		maxZoom: 18,
 		minZoom: 12
 	});
+
 
 	// when a city is selected
 	$('#cities').on('change', function() {
 		var city = this.value, // selected city
-			url =  'http://localhost:3000/' + city; // the api url to get the city data
+			url = 'http://localhost:3000/' + city; // the api url to get the city data
+		buildMap(city, url);
+	});
+
+	$('#submit').on('click', function(){
+		var id = document.getElementById('id').value,
+			city = document.getElementById('city').value,
+			url = 'http://localhost:3000/qa/' + city + '/' + id;
+		buildPolygon(city, id, url)
+	});
+
+	function buildPolygon(city, id, url){
+		$.getJSON(url, function(data) {
+			var geojson = map.addSource(id + "-geojson", data)
+
+			map.addLayer({
+				'id': id + "-geojson",
+				'type': 'fill',
+				'source': id + "-geojson", // use the above geojson source
+			});
+		});
+	}
+
+	function buildMap(city, url){
 		$('#legend').show();
 		if (city !== 'Select city') {
 			$.getJSON(url, function(data) {
@@ -42,20 +66,14 @@ $(function(){
 					}
 					//'filter': ['==', 'building', 'yes'], []
 				})
-
-
-
 				map.on('click', city + '-geojson', function(e){
-					$('#legend').html('<h4>Building Type</h4><div><span style="background-color: #00b3b3"></span>yes<br><span style="background-color: #003333"></span>other</div><br><strong>Area </strong>' + round(e.features[0].properties.area, 2) + ' m&sup2;<br><strong>Building type </strong>' + e.features[0].properties.building + '<br><strong>Centroid </strong>')
+					$('#legend').html('<h4>Building Type</h4><div><span style="background-color: #00b3b3"></span>yes<br><span style="background-color: #003333"></span>other</div><br><strong>Area </strong>' + round(e.features[0].properties.area, 2) + ' m&sup2;<br><strong>Building type </strong>' + e.features[0].properties.building);
 				});
-
 				map.on('mouseenter', city + '-geojson', function () {
 				    map.getCanvas().style.cursor = 'pointer';
-				});
-
-				
+				});	
 			});
 		}
-	});
+	}
 	
 });

@@ -10,7 +10,7 @@ var bodyParser = require('body-parser'); // adds a body object to your request s
 // paths to routers
 var index = require('./routes/index');
 var data = require('./routes/data');
-var area = require('./routes/area');
+var qa = require('./routes/qa');
 
 var app = express(); // initate app
 app.use(express.static(path.join(__dirname, 'public'))); // tells app to use the /public directory
@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: false })); // allows app to read data 
 // create routes from the above paths to the following jade pages 
 app.use('/', index);
 app.use('/', data);
-app.use('/', area);
+app.use('/', qa);
 
 //error handler
 app.use(function(err, req, res, next) {
