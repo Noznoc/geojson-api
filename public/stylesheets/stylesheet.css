@@ -1,55 +1,79 @@
-@import url(https://fonts.googleapis.com/css?family=Yantramanav);
+@import url(https://fonts.googleapis.com/css?family=Didact+Gothic|PT+Sans);
+html {
+  box-sizing: border-box; }
+
+*, *::after, *::before {
+  box-sizing: inherit; }
+
 html, body {
   margin: 0 auto;
   padding: 0px 0px;
   width: 100%;
-  min-height: 100%;
-  overflow-x: hidden;
-  font-family: "Yantramanav", sans-serif; }
+  height: 100%; }
+  html .content, body .content {
+    width: 100%;
+    overflow: hidden; }
+    html .content .navigation, body .content .navigation {
+      width: 250px;
+      float: left;
+      height: 100%; }
+    html .content .map, body .content .map {
+      float: right;
+      height: 100%;
+      width: 82%; }
 
-.menu {
-  background-color: #490808;
-  color: #fff;
-  text-align: center; }
-  .menu select {
-    font-family: "Yantramanav", sans-serif;
-    color: #fff;
-    border-bottom: 0px;
-    border-top: 0px;
-    background-color: #490808;
-    padding: 10px;
-    border-left: 1px solid white;
-    border-right: 1px solid white;
-    border-left: 1px solid white;
-    border-right: 1px solid white; }
-    .menu select:hover {
-      cursor: pointer20px; }
-    .menu select:hover {
-      cursor: pointer; }
-    .menu select option:hover {
-      cursor: pointer; }
+.navigation {
+  text-align: center;
+  background-color: #514799;
+  font-color: white;
+  color: white; }
+  .navigation .title {
+    padding: 15px 0px; }
+  .navigation .buttons {
+    padding: 20px 0px; }
+  .navigation .links {
+    margin-top: 350px; }
 
 #map {
   width: 100%;
   height: 100%; }
 
-#legend {
-  background-color: #fff;
-  border-radius: 3px;
-  top: 50px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  position: absolute;
-  right: 10px;
-  z-index: 1;
-  display: none; }
-  #legend h4 {
-    margin: 0 0 10px; }
-  #legend div span {
-    border-radius: 50%;
-    display: inline-block;
-    height: 10px;
-    margin-right: 5px;
-    width: 10px; }
+.link {
+  padding: 10px 5px;
+  color: white;
+  margin: 5px 20px;
+  font-size: 25px; }
+  .link i {
+    color: white; }
+    .link i:hover {
+      color: #FF99EC; }
+
+.button {
+  background-color: #514799;
+  border: 1px solid white;
+  font-size: 15px;
+  color: white;
+  width: 160px;
+  height: 40px;
+  border-radius: 50px;
+  font-family: "PT Sans", sans-serif;
+  padding: 5px;
+  margin-bottom: 20px; }
+  .button:hover {
+    background-color: #FF99EC;
+    color: white;
+    cursor: pointer; }
+
+.button-activated {
+  background-color: #FF99EC; }
+  .button-activated:hover {
+    background-color: #514799;
+    cursor: pointer; }
+
+.title {
+  font-family: "Didact Gothic", sans-serif; }
+
+.subtitle {
+  font-family: "PT Sans", sans-serif; }
 
 /*# sourceMappingURL=stylesheet.css.map */
