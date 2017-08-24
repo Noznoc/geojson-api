@@ -1,10 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Didact+Gothic|PT+Sans);
-html {
-  box-sizing: border-box; }
-
-*, *::after, *::before {
-  box-sizing: inherit; }
-
 html, body {
   margin: 0 auto;
   padding: 0px 0px;
