@@ -5,11 +5,11 @@ $(function(){
 	// create map, define certain options
 	var map = new mapboxgl.Map({
 		container: "map",
-		style: "mapbox://styles/julconz/cj6inw43z5gza2rlpalymrsjt",
+		style: "mapbox://styles/julconz/cj725p6pj1c272spmrrgseoly",
 		center: [-123.1241, 49.2573],
 		zoom: 12,
 		maxZoom: 18,
-		minZoom: 10
+		minZoom: 4
 	});
 
 	// when a data is selected build map layer

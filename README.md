@@ -16,7 +16,8 @@ The following documentation highlights how to prepare your GeoJSON data into a P
 
 1. Download spatial data
 2. Store the GeoJSON data in a [PostgreSQL](www.postgresql.org) and [PostGIS](postgis.net) enabled database using [GDAL's ogr2ogr](www.gdal.org/ogr2ogr.html)
-3. modify `var connectionString` in server.js to accomodate your database credentials
+3. Modify `var connectionString` in server.js to accomodate your database credentials
+4. Lastly, follow steps under 'Deploy API / App'
 
 # Getting Started
 
@@ -48,7 +49,7 @@ After running this line, go to pgAdmin4, your database should now have a new tab
 
 Now that your database exists with geojson data, you can develop a server and web app that queries and visualizes the data. The server.js code creates the server, but queries.js connects and queries the database to the Node and Express based server. There is one key line you will have to change in queries.js to make the server access your local database: 
 
-    var connectionString = process.env.DATABASE_URL || 'postgres://[user name]:[password]*@127.0.0.1/[database name]';
+    var connectionString = process.env.DATABASE_URL || 'postgres://[user name]:[password]:[port]/[database name]';
 
 The process.env.DATABASE_URL is there just in case you want to use Heroku to store the database in the cloud.
 
@@ -58,7 +59,7 @@ The current query function (getData()) in queries.js pulls the wkb_geometry, the
 
 With your local database and the code, in the command line go into the directory with the code and enter:
 	
-	npm intall
+	npm install
 	
 Then: 
 
