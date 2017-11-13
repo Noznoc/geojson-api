@@ -2,7 +2,7 @@
 
 In general, the (beta) geojson-api was developed for a project that assesses [OpenStreetMap (OSM)](openstreetmap.org) city-level building data. That said, the following documentation is to show how you can work with GeoJSONs with open sourced tools as an alternative to proprietary software; in addition, to show how to store and handle large spatially-referenced data, and how to access the data through an API to repurpose the data however you please. 
 
-In my case, I used the API to output the geojsons onto a Mapbox GL JS map that shows all the buildings based on a client selecting the city. I used data-driven styling for the buildings (e.g., color buildings based on the building type attribute). Mapbox GL JS is great because it has built in functions to handle large geojson files. With Mapbox GL JS, all buildings for Ottawa and Gatineau, Canada, can be projected and rendered onto a map seamlessly. 
+In my case, I used the API to output the GeoJSONs onto a Mapbox GL JS map that shows all the buildings based on a client selecting the city. I used data-driven styling for the buildings (e.g., color buildings based on the building type attribute). Mapbox GL JS is great because it has built in functions to handle large GeoJSON files. With Mapbox GL JS, all buildings for Ottawa and Gatineau, Canada, can be projected and rendered onto a map seamlessly. 
 
 Most of this work was accomplished through reading various sources and combining them together. 
 
@@ -43,17 +43,17 @@ To use GDAL, if yor environment is Windows, add the GDAL folder path to your Con
 
 This line uses ogr2ogr to store a GeoJSON file into a specific table from a specific PostgreSQL/PostGIS database. 
 
-After running this line, go to pgAdmin4, your database should now have a new table with all the geojson data in it. The geometry is stored as a wkb_geometry column with the 4326 (WGS84) projected coordinate system. In my case, it was one of the last columns in the database.
+After running this line, go to pgAdmin4, your database should now have a new table with all the GeoJSON data in it. The geometry is stored as a wkb_geometry column with the 4326 (WGS84) projected coordinate system. In my case, it was one of the last columns in the database.
 
 ## API Installation
 
-Now that your database exists with geojson data, you can develop a server and web app that queries and visualizes the data. The server.js code creates the server, but queries.js connects and queries the database to the Node and Express based server. There is one key line you will have to change in queries.js to make the server access your local database: 
+Now that your database exists with GeoJSON data, you can develop a server and web app that queries and visualizes the data. The server.js code creates the server, but queries.js connects and queries the database to the Node and Express based server. There is one key line you will have to change in queries.js to make the server access your local database: 
 
     var connectionString = process.env.DATABASE_URL || 'postgres://[user name]:[password]:[port]/[database name]';
 
 The process.env.DATABASE_URL is there just in case you want to use Heroku to store the database in the cloud.
 
-The current query function (getData()) in queries.js pulls the wkb_geometry, the building type tag, the area, and the centroid from either table and then converts the query into a geojson feature collection.
+The current query function (getData()) in queries.js pulls the wkb_geometry, the building type tag, the area, and the centroid from either table and then converts the query into a GeoJSON feature collection.
 
 # Deploy API / App
 
@@ -69,7 +69,7 @@ Then in a browser type the following URL:
 
 	localhost:3000
 
-The API should output the table's data as a geojson feature collection of building polygons.
+The API should output the table's data as a GeoJSON feature collection of building polygons.
 
 # Authors
 
