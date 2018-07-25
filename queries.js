@@ -5,7 +5,7 @@ var options = {
   promiseLib: promise // initialization options
 };
 
-var connectionString = process.env.DATABASE_URL || 'postgres://postgres:cgvj1962@localhost:5433/geojson-api'; // Heroku postgres OR local host postgres inventory database @127.0.0.1
+var connectionString = process.env.DATABASE_URL || 'postgres://postgres:password@localhost:5433/geojson-api'; // Heroku postgres OR local host postgres inventory database @127.0.0.1
 var db = pgp(connectionString); // using pg-promise, create database with connection details
 
 /* this calculates the area of all polygons. Units are in squared meters
