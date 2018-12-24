@@ -14,7 +14,7 @@ The following documentation highlights how to prepare your GeoJSON data into a P
 
 # Quick Steps
 
-1. Download spatial data
+1. Download spatial data (or use test GeoJSON files in the data folder)
 2. Store the GeoJSON data in a [PostgreSQL](www.postgresql.org) and [PostGIS](postgis.net) enabled database using [GDAL's ogr2ogr](www.gdal.org/ogr2ogr.html)
 3. Modify `var connectionString` in server.js to accomodate your database credentials
 4. Lastly, follow steps under 'Deploy API / App'
